@@ -223,18 +223,28 @@ public class HostFileManager {
      */
     public static void createHostFile(String fileContent) {
         BufferedWriter writer = null;
+        boolean isSuccess = true;
         try {
             writer = new BufferedWriter(new FileWriter(new File(getHostFilePath())));
             writer.write(fileContent);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Need admin permission(Run as admin).Could not write to hosts file.");
+            isSuccess = false;
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Unexpected Exception.");
+            isSuccess = false;
+        } finally {
+            try {
+                if(writer != null)
+                    writer.close();
+            } catch(IOException io) {
+                JOptionPane.showMessageDialog(null, "Writer could not be closed.");
+            }
         }
-        try {
-            if(writer != null)
-                writer.close();
-        } catch(IOException io) {
-            JOptionPane.showMessageDialog(null, "Writer could not be closed.");
+        if(isSuccess) {
+            JOptionPane.showMessageDialog(null, "Host file update success.");
         }
+        
     }
 
     /**

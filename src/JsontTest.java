@@ -30,7 +30,7 @@ public class JsontTest {
         ArrayList<ExtendedDnsIp> list = new ArrayList<ExtendedDnsIp>();
         list.add(new ExtendedDnsIp("127.0.0.1", true));
         list.add(new ExtendedDnsIp("192.168.5.31", true));
-        ArrayList<Expression> expList = new ArrayList<>();
+        ArrayList<Expression> expList = new ArrayList<Expression>();
         expList.add(new Expression("deneme.eba.gov.tr", list));
         expList.add(new Expression("deneme.eba.gov.tr", list));
         expList.add(new Expression("deneme.eba.gov.tr", list));
