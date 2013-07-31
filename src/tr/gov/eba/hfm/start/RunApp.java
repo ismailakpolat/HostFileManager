@@ -28,6 +28,13 @@ public class RunApp {
         } catch (IllegalAccessException e) {
             // handle exception
         }
+        
+//        try {
+//            Runtime.getRuntime().exec("sudo sh /Users/ismailakpolat/Desktop/scr.sh");
+//        } catch (IOException ex) {
+//            System.out.println(ex.getLocalizedMessage());
+//            JOptionPane.showMessageDialog(null, "sudo");
+//        }
 
         GUIManager.instance();
     }

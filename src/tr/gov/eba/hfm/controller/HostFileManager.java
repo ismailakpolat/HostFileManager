@@ -146,8 +146,6 @@ public class HostFileManager {
         StringTokenizer tokenizer = new StringTokenizer(input);
         
         ArrayList<ExtendedDnsIp> list = new ArrayList<ExtendedDnsIp>();
-//        HashMap<String, Boolean> list = new HashMap<String, Boolean>();
-//        ArrayList<String> list2 = new ArrayList<String>();
 
         while(tokenizer.hasMoreTokens()) {
             String word = tokenizer.nextToken();
@@ -164,9 +162,7 @@ public class HostFileManager {
                         break;
                     }
                 }
-//                word = word.substring(1);
-//                list.add(word);
-//                break;
+
             //If # is at some place of the word, cut the part before # and add it to the list.
             } else if (word.contains("#")) {
                 if(word.indexOf("#")>0) {
@@ -179,11 +175,7 @@ public class HostFileManager {
                 list.add(new ExtendedDnsIp(word,true));
             }
         }
-//        System.out.println("2:"+list2);
-//        System.out.println("1:"+list);
-//        list.addAll(list2);
 
-        //        System.out.println("Start here.......");
         //If at least one proper dns-ip match is given.
         if(list.size() > 1) {
             if(Checker.checkIPAddress(list.get(0).getName()) != null) {
@@ -208,7 +200,6 @@ public class HostFileManager {
                     if(!isAdded) { //If ip has not been added yet, adds new expression to list.
                         ArrayList<ExtendedDnsIp> ipList = new ArrayList<ExtendedDnsIp>();
                         ipList.add(list.get(0));
-                        //list.get(i).getName() : Dns name.
                         expressions.add(new Expression(list.get(i).getName(), ipList));
                     }
                 }
@@ -221,12 +212,12 @@ public class HostFileManager {
      * 
      * @param fileContent Content of newly created hosts file.
      */
-    public static void createHostFile(String fileContent) {
+    public static void createHostFile(String text) {
         BufferedWriter writer = null;
         boolean isSuccess = true;
         try {
             writer = new BufferedWriter(new FileWriter(new File(getHostFilePath())));
-            writer.write(fileContent);
+            writer.write(text);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Need admin permission(Run as admin).Could not write to hosts file.");
             isSuccess = false;
@@ -355,7 +346,6 @@ public class HostFileManager {
 
                         expressions.addAll(fastExprsList); //Add expressions to right pane if they haven't been added yet.
                         
-//                        System.out.println(new Gson().toJson(expressions));
                     }
                 }
             }
@@ -397,9 +387,5 @@ public class HostFileManager {
     public static void sortExpressions() {
        Collections.sort(expressions);
     }
-    
-//    public static void main(String[] args) throws IOException, URISyntaxException {
-//        HostFileManager.readHfmFiles();
-//    }
     
 }

@@ -8,7 +8,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import tr.gov.eba.hfm.controller.HostFileManager;
-import tr.gov.eba.hfm.gui.main.MainFrame;
 
 /**
  *
@@ -42,10 +41,6 @@ public class MainPanel extends javax.swing.JPanel {
         mainScrPane.setViewportBorder(BorderFactory.createTitledBorder(title));
     }
     
-//    public String getScrTitle() {
-//        mainScrPane.getViewport().geş
-//    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -86,8 +81,7 @@ public class MainPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//        System.out.println(MainFrame.mainPane.getArea().getText());
-        HostFileManager.createHostFile(MainFrame.mainPane.getArea().getText());
+        HostFileManager.createHostFile(textArea.getText());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
