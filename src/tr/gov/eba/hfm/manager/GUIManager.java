@@ -4,11 +4,9 @@
  */
 package tr.gov.eba.hfm.manager;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.Template;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
-import java.util.regex.Pattern;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;

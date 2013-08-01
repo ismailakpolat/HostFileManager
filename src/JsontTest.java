@@ -50,9 +50,9 @@ public class JsontTest {
         return expList;
     }
     
-    public static void main(String[] args) throws IOException {
-//        writeJson();
-        readJson();
-    }
+//    public static void main(String[] args) throws IOException {
+////        writeJson();
+//        readJson();
+//    }
     
 }
