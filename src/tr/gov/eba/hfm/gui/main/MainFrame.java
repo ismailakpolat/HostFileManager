@@ -24,6 +24,7 @@ import javax.swing.text.BadLocationException;
 import tr.gov.eba.hfm.config.Config;
 import tr.gov.eba.hfm.controller.HostFileManager;
 import tr.gov.eba.hfm.gui.panels.MainPanel;
+import tr.gov.eba.hfm.gui.panels.ProfileListPanel;
 import tr.gov.eba.hfm.gui.panels.RightPanel;
 import tr.gov.eba.hfm.manager.GUIManager;
 
@@ -35,6 +36,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     public static MainPanel mainPane;
     public static RightPanel rightPane;
+    public static ProfileListPanel profilePane;
     public static File curFile;
     
     /** Creates new form MainFrame */
@@ -45,11 +47,13 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         mainPane = new MainPanel();
         rightPane = new RightPanel();
+        profilePane = new ProfileListPanel();
         initFrame();
         
         setBounds(0,0,1200,650);
         add(mainPane);
-        add(rightPane);
+        rightPaneContainer.add(rightPane);
+        add(profilePane);
         setVisible(true);
         setResizable(false);
         curFile = null;
@@ -83,12 +87,14 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        rightPaneContainer = new javax.swing.JPanel();
         menuBar = new javax.swing.JMenuBar();
+        jMenu2 = new javax.swing.JMenu();
+        quitItem = new javax.swing.JMenuItem();
         fileItem = new javax.swing.JMenu();
         openItem = new javax.swing.JMenuItem();
         saveItem = new javax.swing.JMenuItem();
         saveAsItem = new javax.swing.JMenuItem();
-        quitItem = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         saveExpressionItem = new javax.swing.JMenuItem();
 
@@ -96,7 +102,25 @@ public class MainFrame extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(800, 650));
         getContentPane().setLayout(null);
 
-        fileItem.setText("File");
+        rightPaneContainer.setBackground(new java.awt.Color(204, 255, 255));
+        rightPaneContainer.setLayout(null);
+        getContentPane().add(rightPaneContainer);
+        rightPaneContainer.setBounds(780, 0, 420, 650);
+
+        jMenu2.setText("File");
+
+        quitItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
+        quitItem.setText("Quit");
+        quitItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quitItemActionPerformed(evt);
+            }
+        });
+        jMenu2.add(quitItem);
+
+        menuBar.add(jMenu2);
+
+        fileItem.setText("Profile");
 
         openItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         openItem.setText("Open");
@@ -124,15 +148,6 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         fileItem.add(saveAsItem);
-
-        quitItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
-        quitItem.setText("Quit");
-        quitItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                quitItemActionPerformed(evt);
-            }
-        });
-        fileItem.add(quitItem);
 
         menuBar.add(fileItem);
 
@@ -195,7 +210,7 @@ public class MainFrame extends javax.swing.JFrame {
             BufferedWriter writer = null;
             try {
                 saveUpdate(writer, filePath);
-                
+                ProfileListPanel.updateList();  //To update profile list.
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(null, "Could not write to file.");
             } finally {
@@ -243,16 +258,16 @@ public class MainFrame extends javax.swing.JFrame {
         
         if(retVal == JFileChooser.OPEN_DIALOG) {
             BufferedReader reader = null;
-            setCurFile(chooser.getSelectedFile());
+            File chosenFile = chooser.getSelectedFile();
             try {
-                reader = new BufferedReader(new FileReader(new File(curFile.getAbsolutePath())));
+                reader = new BufferedReader(new FileReader(new File(chosenFile.getAbsolutePath())));
                 String content = ""; 
                 while(reader.ready()) {
                     content += reader.readLine() + "\r\n";
                 }
                 GUIManager.instance().setAreaText(content);
-                HostFileManager.readFile(curFile.getAbsolutePath()); //Reads file and creates expressions from beginning.
-                
+                HostFileManager.readFile(chosenFile.getAbsolutePath()); //Reads file and creates expressions from beginning.
+                setCurFile(chosenFile);
             } catch (FileNotFoundException ex) {
                 JOptionPane.showMessageDialog(null, "File could not be found.");
                 reader = null; //If file could not be found, deselect it.
@@ -312,15 +327,6 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_saveItemActionPerformed
 
-    /**
-     * Safe quit operation.
-     * 
-     * @param evt Event object.
-     */
-    private void quitItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitItemActionPerformed
-        GUIManager.instance().safeQuit();
-    }//GEN-LAST:event_quitItemActionPerformed
-
     private void saveExpressionItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveExpressionItemActionPerformed
         boolean isSaved = HostFileManager.saveExpressions();
         if(isSaved) {
@@ -328,24 +334,34 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_saveExpressionItemActionPerformed
 
+    private void quitItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitItemActionPerformed
+        GUIManager.instance().safeQuit();
+    }//GEN-LAST:event_quitItemActionPerformed
+
     /**
      * Set curFile parameter to current file edited and updates title.
      * 
      * @param file File that is currently edited.
      */
-    private void setCurFile(File file) {
+    public static void setCurFile(File file) {
         curFile = file;
         mainPane.getMainScrPane().setViewportBorder(BorderFactory.createTitledBorder(file.getName()));
         mainPane.setVisible(false);
         mainPane.setVisible(true);
     }
+
+    public static File getCurFile() {
+        return curFile;
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu fileItem;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openItem;
     private javax.swing.JMenuItem quitItem;
+    private javax.swing.JPanel rightPaneContainer;
     private javax.swing.JMenuItem saveAsItem;
     private javax.swing.JMenuItem saveExpressionItem;
     private javax.swing.JMenuItem saveItem;

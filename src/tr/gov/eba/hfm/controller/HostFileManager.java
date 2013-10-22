@@ -47,6 +47,20 @@ public class HostFileManager {
 //        GUIManager.instance().updateExpressionsPanel(); //Update right panel
     }
 
+    public static String[] getProfileNames() {
+        File file = null;
+        try {
+            file = new File(HostFileManager.getContextPath()+"/"+Config.hfmFilesName+"/"+Config.hfmProfilesName);
+        } catch(Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getLocalizedMessage());
+        }
+        
+        if(file==null){
+            return new String[0];
+        }
+        return file.list();
+    }    
+    
     /**
      * Read file.
      * @param path Path of file to be read. 

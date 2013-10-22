@@ -23,7 +23,7 @@ public final class RightPanel extends javax.swing.JPanel {
 
     public RightPanel() {
         initComponents();
-        setLocation(780, 0);
+//        setLocation(780, 0);
 //        recreateContent();
     }
 

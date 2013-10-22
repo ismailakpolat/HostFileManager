@@ -54,8 +54,9 @@ public class MainPanel extends javax.swing.JPanel {
         mainScrPane = new javax.swing.JScrollPane();
         textArea = new javax.swing.JTextPane();
 
+        setLocation(new java.awt.Point(206, 0));
         setPreferredSize(new java.awt.Dimension(775, 650));
-        setSize(new java.awt.Dimension(780, 650));
+        setSize(new java.awt.Dimension(580, 650));
         setLayout(null);
 
         jButton1.setText("Update Hosts File");
@@ -77,7 +78,7 @@ public class MainPanel extends javax.swing.JPanel {
         mainScrPane.setViewportView(textArea);
 
         add(mainScrPane);
-        mainScrPane.setBounds(6, 0, 768, 560);
+        mainScrPane.setBounds(6, 0, 568, 560);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
