@@ -66,7 +66,7 @@ public class MainPanel extends javax.swing.JPanel {
             }
         });
         add(jButton1);
-        jButton1.setBounds(590, 560, 180, 29);
+        jButton1.setBounds(390, 560, 180, 29);
 
         mainScrPane.setViewportBorder(javax.swing.BorderFactory.createTitledBorder("Default"));
 
