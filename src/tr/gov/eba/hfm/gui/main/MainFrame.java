@@ -206,7 +206,7 @@ public class MainFrame extends javax.swing.JFrame {
                 setCurFile(new File(curFile.getAbsolutePath() + Config.hfmFilesExtension));
             }
             String filePath = curFile.getAbsolutePath(); //getName
-            
+            System.out.println("fpath:"+filePath);
             BufferedWriter writer = null;
             try {
                 saveUpdate(writer, filePath);
@@ -287,18 +287,18 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_openItemActionPerformed
 
     private void setProfileDirectory(JFileChooser chooser) {
-        try {
-            File mfile = new File(MainFrame.class.getProtectionDomain().getCodeSource().
-                    getLocation().toURI().getPath());
-
-            File file = new File(mfile.getParentFile().getPath() + "/"+Config.hfmFilesName + "/" +Config.hfmProfilesName);
+//        try {
+//            File mfile = new File(MainFrame.class.getProtectionDomain().getCodeSource().
+//                    getLocation().toURI().getPath());
+            String pPath = HostFileManager.getContextPath();
+            File file = new File(/*mfile.getParentFile().getPath()*/pPath + "/"+Config.hfmFilesName + "/" +Config.hfmProfilesName);
             if(!file.exists()) {
                 file.mkdirs();
             }
             chooser.setCurrentDirectory(file);
-        } catch (URISyntaxException ex) {
-            JOptionPane.showMessageDialog(null, "URI Syntax of templates path is wrong.");
-        }
+//        } catch (URISyntaxException ex) {
+//            JOptionPane.showMessageDialog(null, "URI Syntax of templates path is wrong.");
+//        }
     }
     
     /**

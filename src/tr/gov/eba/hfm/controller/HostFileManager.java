@@ -51,13 +51,15 @@ public class HostFileManager {
         File file = null;
         try {
             file = new File(HostFileManager.getContextPath()+"/"+Config.hfmFilesName+"/"+Config.hfmProfilesName);
+            System.out.println(HostFileManager.getContextPath()+"/"+Config.hfmFilesName+"/"+Config.hfmProfilesName);
         } catch(Exception ex) {
-            JOptionPane.showMessageDialog(null, ex.getLocalizedMessage());
+            JOptionPane.showMessageDialog(null, "err:"+ex.getLocalizedMessage());
         }
         
         if(file==null){
             return new String[0];
         }
+        
         return file.list();
     }    
     
