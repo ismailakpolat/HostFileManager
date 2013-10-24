@@ -206,7 +206,7 @@ public class MainFrame extends javax.swing.JFrame {
                 setCurFile(new File(curFile.getAbsolutePath() + Config.hfmFilesExtension));
             }
             String filePath = curFile.getAbsolutePath(); //getName
-            System.out.println("fpath:"+filePath);
+//            System.out.println("fpath:"+filePath);
             BufferedWriter writer = null;
             try {
                 saveUpdate(writer, filePath);
