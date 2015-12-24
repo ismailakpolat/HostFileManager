@@ -1,7 +1,6 @@
-/build/
-/dist/
-/yedek_hfm_files/
-/store/
-/TANIM.txt
-/master-application.jnlp
-/preview-application.html
+/build/*
+/dist/*
+/yedek_hfm_files/*
+/store/*
+master-application.jnlp
+preview-application.html
