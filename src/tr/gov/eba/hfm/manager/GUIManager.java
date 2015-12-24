@@ -275,9 +275,11 @@ public class GUIManager {
      * Retrieves texts from main panel text area.
      *
      * @return Main panel text area value.
+     * @throws javax.swing.text.BadLocationException
      */
-    public String getAreaText() {
-        return mainFrame.getArea().getText();
+    public String getAreaText() throws BadLocationException {
+        //If getText() is called directly, unexpected line breaks would be encountered.
+        return mainFrame.getArea().getText(0, mainFrame.getArea().getDocument().getLength());
     }
 
     /**

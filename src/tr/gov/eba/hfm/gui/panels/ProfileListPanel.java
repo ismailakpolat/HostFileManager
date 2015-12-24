@@ -111,7 +111,7 @@ public class ProfileListPanel extends javax.swing.JPanel {
             MainFrame.setCurFile(curFile);
             GUIManager.instance().updateExpressionsPanel(); 
         } catch (FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(null, "File could not be found.");
+//            JOptionPane.showMessageDialog(null, "File could not be found.");
             reader = null; //If file could not be found, deselect it.
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "File could not be read.");

@@ -228,12 +228,12 @@ public class HostFileManager {
      * 
      * @param fileContent Content of newly created hosts file.
      */
-    public static void createHostFile(String text) {
+    public static void createHostFile(String fileContent) {
         BufferedWriter writer = null;
         boolean isSuccess = true;
         try {
             writer = new BufferedWriter(new FileWriter(new File(getHostFilePath())));
-            writer.write(text);
+            writer.write(fileContent);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Need admin permission(Run as admin).Could not write to hosts file.");
             isSuccess = false;

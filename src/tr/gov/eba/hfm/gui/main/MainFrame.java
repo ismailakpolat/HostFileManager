@@ -211,7 +211,7 @@ public class MainFrame extends javax.swing.JFrame {
             try {
                 saveUpdate(writer, filePath);
                 ProfileListPanel.updateList();  //To update profile list.
-            } catch (IOException ex) {
+            } catch (IOException|BadLocationException ex) {
                 JOptionPane.showMessageDialog(null, "Could not write to file.");
             } finally {
                 try {
@@ -233,7 +233,7 @@ public class MainFrame extends javax.swing.JFrame {
      * @param path Path to write content into.
      * @throws IOException 
      */
-    private void saveUpdate(BufferedWriter writer, String path) throws IOException {
+    private void saveUpdate(BufferedWriter writer, String path) throws IOException, BadLocationException {
         writer = new BufferedWriter(new FileWriter(new File(path)));
         writer.write(GUIManager.instance().getAreaText());
         writer.flush();
@@ -313,7 +313,7 @@ public class MainFrame extends javax.swing.JFrame {
             BufferedWriter writer = null;
             try {
                 saveUpdate(writer, curFile.getAbsolutePath());
-            } catch (IOException ex) {
+            } catch (IOException|BadLocationException ex) {
                 JOptionPane.showMessageDialog(null, "Could not save(write) file.");
             } finally {
                 try {

@@ -20,6 +20,8 @@ public class MainPanel extends javax.swing.JPanel {
      */
     public MainPanel() {
         initComponents();
+        setLocation(new java.awt.Point(206, 0));
+        setSize(new java.awt.Dimension(580, 650));
 //        setBounds(0,0,800,600);
         setVisible(true);
     }
@@ -54,9 +56,7 @@ public class MainPanel extends javax.swing.JPanel {
         mainScrPane = new javax.swing.JScrollPane();
         textArea = new javax.swing.JTextPane();
 
-        setLocation(new java.awt.Point(206, 0));
         setPreferredSize(new java.awt.Dimension(775, 650));
-        setSize(new java.awt.Dimension(580, 650));
         setLayout(null);
 
         jButton1.setText("Update Hosts File");
@@ -66,7 +66,7 @@ public class MainPanel extends javax.swing.JPanel {
             }
         });
         add(jButton1);
-        jButton1.setBounds(390, 560, 180, 29);
+        jButton1.setBounds(390, 560, 180, 25);
 
         mainScrPane.setViewportBorder(javax.swing.BorderFactory.createTitledBorder("Default"));
 
